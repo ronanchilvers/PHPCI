@@ -9,8 +9,23 @@
 
 namespace PHPCI\Http;
 
+/**
+ * Overridden HTTP\Request object to fix bad handling of request paths in b8\Http\Request
+ *
+ * @author    Ronan Chilvers <ronan@d3r.com>
+ * @copyright 2014 D3R Ltd
+ * @license   http://d3r.com/license D3R Software Licence
+ * @package   D3R
+ */
 class Request extends \b8\Http\Request
 {
+
+    /**
+     * Copied from upstream dev
+     *
+     * @return string
+     * @author Ronan Chilvers <ronan@d3r.com>
+     */
     protected function getRequestPath()
     {
         $path = '';

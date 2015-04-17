@@ -1,6 +1,6 @@
 var TechnicalDebtPlugin = ActiveBuild.UiPlugin.extend({
     id: 'build-technical_debt',
-    css: 'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+    css: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
     title: Lang.get('technical_debt'),
     lastData: null,
     box: true,
@@ -37,7 +37,7 @@ var TechnicalDebtPlugin = ActiveBuild.UiPlugin.extend({
             $('#build-technical_debt').hide();
             return;
         }
-	
+
         this.rendered = true;
         this.lastData = e.queryData;
 

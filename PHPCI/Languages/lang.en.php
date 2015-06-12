@@ -103,6 +103,7 @@ PHPCI',
     'local' => 'Local Path',
     'hg'    => 'Mercurial',
     'svn'   => 'Subversion',
+    'beanstalk'    => 'Beanstalk',
 
     'where_hosted' => 'Where is your project hosted?',
     'choose_github' => 'Choose a GitHub repository:',

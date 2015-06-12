@@ -330,6 +330,39 @@ class WebhookController extends \b8\Controller
         return array('status' => 'ignored', 'message' => 'Unusable payload.');
     }
 
+
+    /**
+     * Called by beanstallk
+     */
+    public function beanstalk($project) {
+        $response = new b8\Http\Response\JsonResponse();
+        $response->setContent(array('status' => 'ok'));
+
+        $request = file_get_contents("php://input");
+        $request = json_decode($request, true);
+        $payload = $request['payload'];
+
+        try {
+            if (isset($payload['commits']) && is_array($payload['commits'])) {
+                // If we have a list of commits, then add them all as builds to be tested:
+
+                foreach ($payload['commits'] as $commit) {
+                    $committer = $commit['author']['email'];
+                    $extra = array(
+                        'changeset_url' => $commit['changeset_url']
+                    );
+                    $this->createBuild($project, $commit['id'], $commit['branch'], $committer, $commit['message'],
+                        $extra);
+                }
+            }
+        } catch (\Exception $ex) {
+            $response->setResponseCode(500);
+            $response->setContent(array('status' => 'failed', 'error' => $ex->getMessage()));
+        }
+
+        return $response;
+    }
+
     /**
      * Wrapper for creating a new build.
      *

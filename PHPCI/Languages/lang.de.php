@@ -103,7 +103,8 @@ generiert. Um es zu verwenden, fügen Sie einfach den folgenden Public Key im Ab
     'local' => 'Lokaler Pfad',
     'hg'    => 'Mercurial',
     'svn'   => 'Subversion',
-    
+    'beanstalk'    => 'Beanstalk',
+
     'where_hosted' => 'Wo wird Ihr Projekt gehostet?',
     'choose_github' => 'Wählen Sie ein GitHub Repository:',
 
@@ -148,6 +149,7 @@ generiert. Um es zu verwenden, fügen Sie einfach den folgenden Public Key im Ab
     'webhooks_help_gitlab' => 'Um für dieses Projekt automatisch einen Build zu starten, wenn neue Commits gepushed werden, fügen Sie die untenstehende URL in der Web Hooks Sektion Ihres GitLab Repositories hinzu.',
 
     'webhooks_help_bitbucket' => 'Um für dieses Projekt automatisch einen Build zu starten, wenn neue Commits gepushed werden, fügen Sie die untenstehende URL als "POST" Service in der <a href="https://bitbucket.org/%s/admin/services">Services</a>-Sektion Ihres Bitbucket Repositories hinzu.',
+    'webhooks_help_beanstalk' => 'Um für dieses Projekt automatisch einen Build zu starten, wenn neue Commits gepushed werden, fügen Sie die untenstehende URL in der Web Hooks Sektion Ihres Beanstalk Repositories hinzu.',
 
     // View Build
     'build_x_not_found' => 'Build mit ID %d existiert nicht.',
@@ -191,8 +193,8 @@ generiert. Um es zu verwenden, fügen Sie einfach den folgenden Public Key im Ab
     'codeception_suite' => 'Suite',
     'codeception_time' => 'Zeit',
     'codeception_synopsis' => '<strong>%1$d</strong> Tests in <strong>%2$f</strong> Sekunden ausgeführt.
-                               <strong>%3$d</strong> Fehler.',    
-    
+                               <strong>%3$d</strong> Fehler.',
+
     'file' => 'Datei',
     'line' => 'Zeile',
     'class' => 'Klasse',

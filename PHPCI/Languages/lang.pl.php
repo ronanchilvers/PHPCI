@@ -103,6 +103,7 @@ od wybranego kodu źródłowego platformy hostingowej.',
     'local' => 'Lokalna Ścieżka ',
     'hg'    => 'Mercurial',
     'svn' => 'Subversion',
+    'beanstalk'    => 'Beanstalk',
 
     'where_hosted' => 'Gdzie hostowany jest Twój projekt?',
     'choose_github' => 'Wybierz repozytorium GitHub:',

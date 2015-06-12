@@ -64,6 +64,9 @@ class BuildFactory
             case 'svn':
                 $type = 'SubversionBuild';
                 break;
+            case 'beanstalk':
+                $type = 'BeanstalkBuild';
+                break;
         }
 
         $type = '\\PHPCI\\Model\\Build\\' . $type;

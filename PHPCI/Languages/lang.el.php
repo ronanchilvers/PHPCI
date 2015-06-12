@@ -102,6 +102,7 @@ PHPCI',
     'remote' => 'Απομακρυσμένη διεύθυνση URL',
     'local' => 'Τοπική Διαδρομή',
     'hg'    => 'Ευμετάβλητο',
+    'beanstalk'    => 'Beanstalk',
 
     'where_hosted' => 'Πού φιλοξενείται το έργο σας;',
     'choose_github' => 'Επιλέξτε ένα αποθετήριο GitHub:',

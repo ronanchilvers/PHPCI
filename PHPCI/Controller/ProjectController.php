@@ -251,7 +251,7 @@ class ProjectController extends PHPCI\Controller
         $values['key'] = $values['ssh_private_key'];
         $values['pubkey'] = $values['ssh_public_key'];
 
-        if ($values['type'] == "gitlab") {
+        if ($values['type'] == "gitlab" || $values['type'] == "beanstalk") {
             $accessInfo = $project->getAccessInformation();
             $reference = $accessInfo["user"].'@'.$accessInfo["domain"].':' . $project->getReference().".git";
             $values['reference'] = $reference;
@@ -305,18 +305,19 @@ class ProjectController extends PHPCI\Controller
         $form->addField(new Form\Element\Hidden('pubkey'));
 
         $options = array(
-            'choose' => Lang::get('select_repository_type'),
-            'github' => Lang::get('github'),
+            'choose'    => Lang::get('select_repository_type'),
+            'github'    => Lang::get('github'),
             'bitbucket' => Lang::get('bitbucket'),
-            'gitlab' => Lang::get('gitlab'),
-            'remote' => Lang::get('remote'),
-            'local' => Lang::get('local'),
-            'hg'    => Lang::get('hg'),
-            'svn'    => Lang::get('svn'),
-            );
+            'gitlab'    => Lang::get('gitlab'),
+            'remote'    => Lang::get('remote'),
+            'local'     => Lang::get('local'),
+            'hg'        => Lang::get('hg'),
+            'svn'       => Lang::get('svn'),
+            'beanstalk' => Lang::get('beanstalk'),
+        );
 
         $field = Form\Element\Select::create('type', Lang::get('where_hosted'), true);
-        $field->setPattern('^(github|bitbucket|gitlab|remote|local|hg|svn)');
+        $field->setPattern('^(github|bitbucket|gitlab|remote|local|hg|svn|beanstalk)');
         $field->setOptions($options);
         $field->setClass('form-control')->setContainerClass('form-group');
         $form->addField($field);
@@ -415,6 +416,10 @@ class ProjectController extends PHPCI\Controller
                 ),
                 'bitbucket' => array(
                     'regex' => '/^[a-zA-Z0-9_\-]+\/[a-zA-Z0-9_\-\.]+$/',
+                    'message' => Lang::get('error_bitbucket')
+                ),
+                'beanstalk' => array(
+                    'regex' => '`^(.*)@(.*):(.*)/(.*)\.git`',
                     'message' => Lang::get('error_bitbucket')
                 ),
             );

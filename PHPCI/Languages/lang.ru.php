@@ -101,6 +101,7 @@ PHPCI',
     'local' => 'Локальный путь',
     'hg'    => 'Mercurial',
     'svn'   => 'Subversion',
+    'beanstalk'    => 'Beanstalk',
 
     'where_hosted' => 'Расположение проекта',
     'choose_github' => 'Выберите GitHub репозиторий:',

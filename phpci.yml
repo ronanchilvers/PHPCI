@@ -23,10 +23,12 @@ test:
     allowed_warnings: 0
     rules:
       - phpmd.xml
+    allow_failures: true
   php_code_sniffer:
     standard: phpcs.xml
     allowed_warnings: 0
     allowed_errors: 0
+    allow_failures: true
   php_loc:
   php_unit:
   php_docblock_checker:

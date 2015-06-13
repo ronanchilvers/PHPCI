@@ -124,6 +124,10 @@ class Project extends ProjectBase
                 $icon = 'git';
                 break;
 
+            case 'beanstalk':
+                $icon = 'leaf';
+                break;
+
             default:
                 $icon = 'cog';
                 break;

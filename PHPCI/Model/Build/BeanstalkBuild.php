@@ -17,7 +17,7 @@ use PHPCI\Model\Build\GitlabBuild;
  * @package      PHPCI
  * @subpackage   Core
  */
-class BeanstalkBuild extends GitlabBuild
+class BeanstalkBuild extends SubversionBuild
 {
     /**
      * Get link to commit from another source (i.e. Github)

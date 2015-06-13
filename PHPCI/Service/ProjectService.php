@@ -116,7 +116,7 @@ class ProjectService
         $matches = array();
         $reference = $project->getReference();
 
-        if ($project->getType() == 'gitlab' || $project->getType() == 'beanstalk') {
+        if ($project->getType() == 'gitlab') {
             $info = array();
 
             if (preg_match('`^(.+)@(.+):([0-9]*)\/?(.+)\.git`', $reference, $matches)) {

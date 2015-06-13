@@ -343,13 +343,13 @@ class WebhookController extends \b8\Controller
             if (isset($request['trigger']) && 'commit' == $request['trigger']) {
                 $payload = $request['payload'];
 
-                $id        = $payload['id'];
+                $id        = (string) $payload['id'];
                 $branch    = $payload['branch'];
                 $committer = $payload['author']['email'];
                 $message   = $payload['message'];
                 $extra = array(
-                    'changeset_url' => $commit['changeset_url'],
-                    'committed_at'  => $commit['commtted_at']
+                    'changeset_url' => $payload['changeset_url'],
+                    'committed_at'  => $payload['committed_at']
                 );
 
                 $this->createBuild(

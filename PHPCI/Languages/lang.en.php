@@ -153,6 +153,9 @@ PHPCI',
                                 <a href="https://bitbucket.org/%s/admin/services">
                                 Services</a> section of your Bitbucket repository.',
 
+    'webhooks_help_beanstalk' => 'To automatically build this project when new commits are pushed, add the URL below
+                                as a "Modular Webhook" service in the integrations section of your repository settings.',
+
     // View Build
     'build_x_not_found' => 'Build with ID %d does not exist.',
     'build_n' => 'Build %d',

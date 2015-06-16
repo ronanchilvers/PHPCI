@@ -27,6 +27,9 @@ foreach($projects as $project):
             case 3:
                 $subcls = 'red';
                 break;
+            case 4:
+                $subcls = 'blue';
+                break;
         }
         // Use the last 5 builds to determine project health:
         $failures = 0;
@@ -47,6 +50,9 @@ foreach($projects as $project):
                     $failures++;
                     $statuses[] = 'failed';
                     $failure = is_null($failure) && !is_null($build->getFinished()) ? Lang::formatDateTime($build->getFinished()) : $failure;
+                    break;
+                case 0:
+                    $statuses[] = 'ignored';
                     break;
             }
         }
@@ -150,6 +156,10 @@ foreach($projects as $project):
                     case 3:
                         $class = 'bg-red';
                         $icon = 'fa-times';
+                        break;
+                    case 4:
+                        $class = 'bg-blue';
+                        $icon = 'fa-minus';
                         break;
                 }
                 echo '<a href="' . $link .'" class="small-box-footer-build small-box-footer ' . $class . '"><i class="fa ' . $icon . '"></i></a>';

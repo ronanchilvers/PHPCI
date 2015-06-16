@@ -30,10 +30,16 @@ switch($build->getStatus())
 		$status = Lang::get('success');
 	break;
 
-	case 3:
-		$cls = 'danger';
-		$subcls = 'danger';
-		$status = Lang::get('failed');
+    case 3:
+        $cls = 'danger';
+        $subcls = 'danger';
+        $status = Lang::get('failed');
+    break;
+
+	case 4:
+		$cls = 'default';
+		$subcls = 'default';
+		$status = Lang::get('ignored');
 	break;
 }
 ?>

@@ -181,6 +181,23 @@ class Builder implements LoggerAwareInterface
      */
     public function execute()
     {
+        $branchList = $this->getBranchLists();
+        if (!empty($branchList)) {
+            $branch      = $this->build->getBranch();
+            $ignoreBuild = false;
+            $inExcept    = (isset($branchList['except']) && in_array($branch, $branchList['except']));
+            $inOnly      = (isset($branchList['only']) && in_array($branch, $branchList['only']));
+
+            if ($inExcept && !$inOnly) {
+                // Update the build in the database, ping any external services.
+                $this->build->setStatus(Build::STATUS_IGNORED);
+                $this->store->save($this->build);
+                // @todo Implement status postbacks
+                // $this->build->sendStatusPostback();
+                return;
+            }
+        }
+
         // Update the build in the database, ping any external services.
         $this->build->setStatus(Build::STATUS_RUNNING);
         $this->build->setStarted(new \DateTime());
@@ -355,6 +372,7 @@ class Builder implements LoggerAwareInterface
     {
         $this->buildLogger->logFailure($message, $exception);
     }
+
     /**
      * Returns a configured instance of the plugin factory.
      *
@@ -401,5 +419,28 @@ class Builder implements LoggerAwareInterface
         );
 
         return $pluginFactory;
+    }
+
+    /**
+     * Parse a set of ignore / include branch names from the config
+     *
+     * @return string<string>[]
+     * @author Ronan Chilvers <ronan@d3r.com>
+     */
+    protected function getBranchLists()
+    {
+        $empty = array(
+            'only'   => array(),
+            'except' => array(),
+        );
+        $settings = $this->config['build_settings'];
+        if (empty($settings)) {
+            return $empty;
+        }
+        if (!isset($settings['branches'])) {
+            return $empty;
+        }
+
+        return $settings['branches'];
     }
 }

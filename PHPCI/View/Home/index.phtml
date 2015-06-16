@@ -41,6 +41,12 @@
                                 $label = Lang::get('failed');
                                 $color = 'red';
                                 break;
+
+                            case \PHPCI\Model\Build::STATUS_IGNORED:
+                                $updated = $build->getCreated();
+                                $label = Lang::get('ignored');
+                                $color = 'blue';
+                                break;
                         }
 
                         if (!$updated) {

@@ -81,12 +81,13 @@ PHPCI',
 
     // Timeline:
     'latest_builds' => 'Latest Builds',
-    'pending' => 'Pending',
-    'running' => 'Running',
-    'success' => 'Success',
-    'successful' => 'Successful',
-    'failed' => 'Failed',
-    'manual_build' => 'Manual Build',
+    'pending'       => 'Pending',
+    'running'       => 'Running',
+    'success'       => 'Success',
+    'successful'    => 'Successful',
+    'failed'        => 'Failed',
+    'ignored'       => 'Ignored',
+    'manual_build'  => 'Manual Build',
 
     // Add/Edit Project:
     'new_project' => 'New Project',

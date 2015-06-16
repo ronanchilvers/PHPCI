@@ -37,6 +37,7 @@ class BuildStatusService
     protected $finishedStatusIds = array(
         Build::STATUS_SUCCESS,
         Build::STATUS_FAILED,
+        Build::STATUS_IGNORED,
     );
 
     /**
@@ -179,6 +180,8 @@ class BuildStatusService
                 return 'Success';
             case Build::STATUS_FAILED:
                 return 'Failure';
+            case Build::STATUS_IGNORED:
+                return 'Ignored';
         }
         return 'Unknown';
     }

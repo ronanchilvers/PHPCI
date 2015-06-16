@@ -86,6 +86,7 @@ PHPCI',
     'success' => 'Sukces',
     'successful' => 'Zakończone sukcesem',
     'failed' => 'Nieudane',
+    'ignored'       => 'Ignored',
     'manual_build' => 'Budowanie Manualne',
 
     // Add/Edit Project:

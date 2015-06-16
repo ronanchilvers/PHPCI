@@ -86,6 +86,7 @@ PHPCI',
     'success' => 'Επιτυχία',
     'successful' => 'Επιτυχής',
     'failed' => 'Αποτυχία',
+    'ignored'       => 'Ignored',
     'manual_build' => 'Χειροκίνητη κατασκευή',
 
     // Add/Edit Project:

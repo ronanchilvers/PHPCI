@@ -181,23 +181,6 @@ class Builder implements LoggerAwareInterface
      */
     public function execute()
     {
-        $branchList = $this->getBranchLists();
-        if (!empty($branchList)) {
-            $branch      = $this->build->getBranch();
-            $ignoreBuild = false;
-            $inExcept    = (isset($branchList['except']) && in_array($branch, $branchList['except']));
-            $inOnly      = (isset($branchList['only']) && in_array($branch, $branchList['only']));
-
-            if ($inExcept && !$inOnly) {
-                // Update the build in the database, ping any external services.
-                $this->build->setStatus(Build::STATUS_IGNORED);
-                $this->store->save($this->build);
-                // @todo Implement status postbacks
-                // $this->build->sendStatusPostback();
-                return;
-            }
-        }
-
         // Update the build in the database, ping any external services.
         $this->build->setStatus(Build::STATUS_RUNNING);
         $this->build->setStarted(new \DateTime());
@@ -208,6 +191,29 @@ class Builder implements LoggerAwareInterface
         try {
             // Set up the build:
             $this->setupBuild();
+
+            $branchList = $this->getBranchLists();
+            if (!empty($branchList)) {
+                $branch      = $this->build->getBranch();
+                $ignoreBuild = (isset($branchList['only']) && 0 < count($branchList['only'])) ? true : false ;
+                $inOnly      = (isset($branchList['only']) && in_array($branch, $branchList['only']));
+                $inExcept    = (isset($branchList['except']) && in_array($branch, $branchList['except']));
+
+                if (true == $ignoreBuild && true == $inOnly) {
+                    $ignoreBuild = false;
+                } elseif (false == $ignoreBuild && true == $inExcept) {
+                    $ignoreBuild = true;
+                }
+
+                if (true == $ignoreBuild) {
+                    // Update the build in the database, ping any external services.
+                    $this->build->setStatus(Build::STATUS_IGNORED);
+                    $this->store->save($this->build);
+                    // @todo Implement status postbacks
+                    // $this->build->sendStatusPostback();
+                    return;
+                }
+            }
 
             // Run the core plugin stages:
             foreach (array('setup', 'test') as $stage) {
@@ -433,6 +439,9 @@ class Builder implements LoggerAwareInterface
             'only'   => array(),
             'except' => array(),
         );
+        if (!isset($this->config['build_settings'])) {
+            return $empty;
+        }
         $settings = $this->config['build_settings'];
         if (empty($settings)) {
             return $empty;

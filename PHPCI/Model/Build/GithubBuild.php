@@ -54,26 +54,36 @@ class GithubBuild extends RemoteGitBuild
         $url    = 'https://api.github.com/repos/'.$project->getReference().'/statuses/'.$this->getCommitId();
         $http   = new \b8\HttpClient();
 
-        switch($this->getStatus())
-        {
+        switch ($this->getStatus()) {
             case 0:
             case 1:
                 $status = 'pending';
+                $description = 'Build is pending';
                 break;
             case 2:
                 $status = 'success';
+                $description = 'Build has completed successfully';
                 break;
             case 3:
                 $status = 'failure';
+                $description = 'Build has failed check the link for more details';
                 break;
             default:
                 $status = 'error';
+                $description = 'Build was unable to complete due to an error';
                 break;
         }
 
+        $context = ($this->getExtra('build_type') == 'pull_request') ? 'continuous-integration/phpci-pr' : 'continuous-integration/phpci';
+
         $phpciUrl = \b8\Config::getInstance()->get('phpci.url');
-        $params = array(    'state' => $status,
-                            'target_url' => $phpciUrl . '/build/view/' . $this->getId());
+        $params = array(
+            'state' => $status,
+            'target_url' => $phpciUrl . '/build/view/' . $this->getId(),
+            'context' => $context,
+            'description' => $description,
+        );
+
         $headers = array(
             'Authorization: token ' . $token,
             'Content-Type: application/x-www-form-urlencoded'
